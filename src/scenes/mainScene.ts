@@ -15,15 +15,12 @@ import {
     PLAYABLE_LEVELS,
     Subscript,
 } from "../objects/playableLevel";
+import BorderedText from "../objects/borderedText";
 
 /**
  * The MainScene is the core scene where all the action happens.
  */
 export default class MainScene extends Phaser.Scene {
-    /**
-     * The static background image.
-     */
-    private background: Phaser.GameObjects.Image;
     /**
      * The flexibly-sized cat
      */
@@ -99,16 +96,18 @@ export default class MainScene extends Phaser.Scene {
      */
     setupStaticParts() {
         // Background
-        this.add.image(this.scale.width / 2, this.scale.height / 2, "backdrop");
+        this.add
+            .image(this.scale.width / 2, this.scale.height / 2, "backdrop")
+            .setDepth(-1);
 
         // Main game instructions
-        let instructions = this.add.text(
+        const instructions = new BorderedText(
+            this,
             this.scale.width / 2,
-            20,
+            40,
             "Pet the cat, but only on the correct index.",
             DEFAULT_FONT_SETTINGS
         );
-        instructions.setOrigin(0.5, 0);
     }
 
     /**

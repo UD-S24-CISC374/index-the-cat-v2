@@ -1,4 +1,5 @@
 import { DEFAULT_FONT_SETTINGS } from "../config";
+import BorderedText from "./borderedText";
 
 /**
  * Simple Group for holding information about the Round, mostly win/loss statistics,
@@ -15,8 +16,8 @@ export class RoundStats extends Phaser.GameObjects.Group {
     /** The name of this round. */
     private roundName: string;
     /** The text objects on the screen */
-    private roundText: Phaser.GameObjects.Text;
-    private overallText: Phaser.GameObjects.Text;
+    private roundText: BorderedText;
+    private overallText: BorderedText;
 
     constructor(scene: Phaser.Scene) {
         super(scene, []);
@@ -32,20 +33,26 @@ export class RoundStats extends Phaser.GameObjects.Group {
      */
     private setupTextObjects() {
         const EDGE_PADDING: number = 10;
-        const TOP_THIRD: number = this.scene.scale.height / 3;
+        const TEXT_TOP: number = this.scene.scale.height / 5;
         // The statistics for the Round on the left side
-        this.roundText = this.scene.add
-            .text(EDGE_PADDING, TOP_THIRD, "Round")
-            .setStyle(DEFAULT_FONT_SETTINGS)
-            .setOrigin(0, 0.5);
-        this.add(this.roundText, true);
+        this.roundText = new BorderedText(
+            this.scene,
+            EDGE_PADDING,
+            TEXT_TOP,
+            "Round Score",
+            DEFAULT_FONT_SETTINGS
+        );
+        this.roundText.setOrigin(0, 0);
         // The statistics for the Overall game on the right side
-        this.overallText = this.scene.add
-            .text(this.scene.scale.width - EDGE_PADDING, TOP_THIRD, "Overall")
-            .setStyle(DEFAULT_FONT_SETTINGS)
-            .setOrigin(1, 0.5)
-            .setAlign("right");
-        this.add(this.overallText, true);
+        this.overallText = new BorderedText(
+            this.scene,
+            this.scene.scale.width - EDGE_PADDING,
+            TEXT_TOP,
+            "Overall Score",
+            DEFAULT_FONT_SETTINGS
+        );
+        this.overallText.setOrigin(1, 0);
+        this.overallText.text.setAlign("right");
     }
 
     /**
@@ -91,12 +98,12 @@ export class RoundStats extends Phaser.GameObjects.Group {
      */
     updateStats() {
         this.roundText.setText(
-            `${this.roundName}\n` +
+            `${this.roundName} Score\n` +
                 `Correct: ${this.roundCorrect}\n` +
                 `Wrong: ${this.roundWrong}`
         );
         this.overallText.setText(
-            `Overall\n` +
+            `Overall Score\n` +
                 `Correct: ${this.overallCorrect}\n` +
                 `Wrong: ${this.overallWrong}`
         );

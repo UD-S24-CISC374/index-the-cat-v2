@@ -5,8 +5,8 @@ const DEFAULT_WIDTH = 1280;
 const DEFAULT_HEIGHT = 720;
 
 export const CONFIG = {
-    title: "My Untitled Phaser 3 Game",
-    version: "0.0.1",
+    title: "Index the Cat",
+    version: "2.0.0",
     type: Phaser.AUTO,
     backgroundColor: "#ffffff",
     scale: {
@@ -21,11 +21,10 @@ export const CONFIG = {
         default: "arcade",
         arcade: {
             debug: false,
-            gravity: { y: 300 },
         },
     },
     input: {
-        keyboard: true,
+        keyboard: false,
         mouse: true,
         touch: true,
         gamepad: false,

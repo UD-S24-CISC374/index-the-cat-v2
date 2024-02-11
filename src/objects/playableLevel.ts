@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 import { Level, LevelType } from "./level";
 
 const Between = Phaser.Math.Between;
@@ -73,7 +74,14 @@ function makeAnySubscripts(length: number): Subscript {
     }
 }
 
-function wordOfLength(length: number, words: Record<string, string[]>): string {
+function wordOfLength(
+    length: number,
+    words: Record<string, string[]> | undefined
+): string {
+    if (!words) {
+        // TODO: Make a proper error screen for users to see
+        throw new Error("No words were loaded.");
+    }
     let wordList = words[length];
     let chosenWord = Phaser.Math.RND.pick(wordList);
     return chosenWord;
@@ -148,8 +156,8 @@ export const PLAYABLE_LEVELS: { [name: string]: Level[] } = {
             "[]",
             LevelType.Win,
             () => 0,
-            (length) => ":)",
-            (length) => [0]
+            () => ":)",
+            () => [0]
         ),
         // TODO: Separate win scene
     ],
@@ -223,15 +231,15 @@ export const PLAYABLE_LEVELS: { [name: string]: Level[] } = {
             '""',
             LevelType.Win,
             () => 0,
-            (length) => ":)",
-            (length) => [0]
+            () => ":)",
+            () => [0]
         ),
     ],
 };
 
 function getParameterByName(name: string, url?: string) {
     if (!url) url = window.location.href;
-    name = name.replace(/[\[\]]/g, "\\$&");
+    name = name.replace(/[[\]]/g, "\\$&");
     var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
         results = regex.exec(url);
     if (!results) return null;

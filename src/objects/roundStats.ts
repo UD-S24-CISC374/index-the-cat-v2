@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 import { DEFAULT_FONT_SETTINGS } from "../config";
 import BorderedText from "./borderedText";
 
@@ -40,7 +41,7 @@ export class RoundStats extends Phaser.GameObjects.Group {
             EDGE_PADDING,
             TEXT_TOP,
             "Round Score",
-            DEFAULT_FONT_SETTINGS
+            { ...DEFAULT_FONT_SETTINGS, fontSize: "26px" }
         );
         this.roundText.setOrigin(0, 0);
         // The statistics for the Overall game on the right side
@@ -49,7 +50,7 @@ export class RoundStats extends Phaser.GameObjects.Group {
             this.scene.scale.width - EDGE_PADDING,
             TEXT_TOP,
             "Overall Score",
-            DEFAULT_FONT_SETTINGS
+            { ...DEFAULT_FONT_SETTINGS, fontSize: "26px" }
         );
         this.overallText.setOrigin(1, 0);
         this.overallText.text.setAlign("right");

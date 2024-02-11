@@ -1,3 +1,5 @@
+import Phaser from "phaser";
+
 // Use a purple color for the dragger
 const DRAGGER_COLOR: number = 0xff00ff;
 // Lazy coding here - embedding the expected numeric constants instead of dynamic calculation

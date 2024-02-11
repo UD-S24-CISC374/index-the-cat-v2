@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 import { DEFAULT_FONT_SETTINGS } from "../config";
 import { ValueGenerator } from "./level";
 
@@ -39,7 +40,7 @@ export default class NumberList extends Phaser.GameObjects.Container {
         this.removeAll(true);
         let completeString = generateValue(
             catBodyCount,
-            this.scene.cache.json.get("words")
+            this.scene.cache.json.get("words") || {}
         );
         for (let i = 0; i < catBodyCount; i += 1) {
             let text = this.makeValue(
@@ -132,8 +133,8 @@ export default class NumberList extends Phaser.GameObjects.Container {
      * Iterate through all the values and turn off the highlight for each one.
      */
     removeHighlights() {
-        this.getAll().map((text: Phaser.GameObjects.GameObject) =>
-            this.reformatText(text as Phaser.GameObjects.Text, false)
-        );
+        this.getAll().map((text: Phaser.GameObjects.GameObject) => {
+            this.reformatText(text as Phaser.GameObjects.Text, false);
+        });
     }
 }

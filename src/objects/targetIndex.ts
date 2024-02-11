@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 import { Level, IndexGenerator } from "./level";
 import { Subscript, Slice } from "./playableLevel";
 
@@ -169,6 +170,6 @@ export default class TargetIndex extends Phaser.GameObjects.Container {
      * Retrieve the currently stored target index.
      */
     getTargetIndex(): NormalizedSubscript {
-        return this.getData("index");
+        return this.getData("index") as NormalizedSubscript;
     }
 }

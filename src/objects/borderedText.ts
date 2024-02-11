@@ -1,3 +1,5 @@
+import Phaser from "phaser";
+
 export interface Padding {
     x: number;
     y: number;

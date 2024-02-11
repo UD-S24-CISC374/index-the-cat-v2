@@ -3,11 +3,12 @@
  * The cat is presented here for petting, with level transitions all occurring within this scene.
  * @packageDocumentation
  */
+import Phaser from "phaser";
 import { DEFAULT_FONT_SETTINGS } from "../config";
 import TargetIndex from "../objects/targetIndex";
 import Cat from "../objects/cat";
 import NumberList from "../objects/numberList";
-import { Level, LevelType } from "../objects/level";
+import { LevelType } from "../objects/level";
 import { Dragger } from "../objects/dragger";
 import { RoundStats } from "../objects/roundStats";
 import {
@@ -101,7 +102,7 @@ export default class MainScene extends Phaser.Scene {
             .setDepth(-1);
 
         // Main game instructions
-        const instructions = new BorderedText(
+        new BorderedText(
             this,
             this.scale.width / 2,
             40,
@@ -153,7 +154,7 @@ export default class MainScene extends Phaser.Scene {
      */
     startPet(mouse: Phaser.Input.Pointer, gameObject: NumberList) {
         if (!this.feedbackTimer) {
-            let chosen: number = gameObject.getData("index");
+            let chosen: number = gameObject.getData("index") as number;
             this.dragger.start(
                 this.listGroup.x + gameObject.x + gameObject.width / 2,
                 this.listGroup.y,
@@ -172,7 +173,7 @@ export default class MainScene extends Phaser.Scene {
         if (this.dragger.startIndex === null) {
             return;
         }
-        let chosen = gameObject.getData("index");
+        let chosen = gameObject.getData("index") as number;
         if (chosen !== this.dragger.endIndex) {
             let moved = this.dragger.move(
                 this.listGroup.x + gameObject.x + gameObject.width / 2,
@@ -193,7 +194,7 @@ export default class MainScene extends Phaser.Scene {
         if (this.dragger.startIndex === null) {
             return;
         }
-        let chosen = gameObject.getData("index");
+        let chosen = gameObject.getData("index") as number;
         if (chosen !== this.dragger.endIndex) {
             let moved = this.dragger.move(
                 this.listGroup.x + gameObject.x + gameObject.width / 2,
@@ -206,14 +207,14 @@ export default class MainScene extends Phaser.Scene {
                 );
             }
         }
-        this.endPetOutside(mouse);
+        this.endPetOutside();
     }
 
     /**
      * Respond to the mouse being released, but we're not necessarily on the NumberList.
      * @param mouse
      */
-    endPetOutside(mouse: Phaser.Input.Pointer) {
+    endPetOutside() {
         if (this.dragger.startIndex === null) {
             return;
         }

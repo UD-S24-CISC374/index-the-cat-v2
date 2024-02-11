@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 import { DEFAULT_FONT_SETTINGS } from "../config";
 
 /**

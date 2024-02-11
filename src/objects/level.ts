@@ -17,7 +17,11 @@ export enum LevelType {
  * Our levels use simple anonymous functions to generate their values, length, and indices.
  * These type definitions formalize those functions more concretely.
  */
-export type ValueGenerator = (n: number, data?: any) => string;
+export type DisplayValue = string | string[];
+export type ValueGenerator = (
+    n: number,
+    data?: Record<string, string[]>
+) => string;
 // A function that consumes nothing but returns a number when executed (e.g., at random).
 export type LengthGenerator = () => number;
 // A function that consumes a number and returns a list of numbers (some of which may be null)
